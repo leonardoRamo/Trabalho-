@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho - MG Calçados</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .container-carrinho {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .header-carrinho {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .header-carrinho h1 {
+      font-size: 36px;
+      color: #333;
+    }
+
+    .btn-voltar {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-voltar:hover {
+      transform: translateX(-5px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .info-carrinho {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .info-carrinho h3 {
+      color: #667eea;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    #lista {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .item-carrinho {
+      display: flex;
+      gap: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .item-carrinho:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .item-carrinho img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .item-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .item-info p {
+      margin: 5px 0;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .item-info p:first-child {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .item-info span {
+      color: #667eea;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .preco-item {
+      font-size: 20px;
+      color: #f5576c;
+      font-weight: 700;
+    }
+
+    .btn-remover {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 12px;
+      transition: all 0.3s ease;
+      width: fit-content;
+    }
+
+    .btn-remover:hover {
+      transform: scale(1.05);
+    }
+
+    .resumo {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+      margin-top: 30px;
+      border: 2px solid #667eea;
+    }
+
+    .resumo h2 {
+      color: #333;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 15px;
+    }
+
+    #total {
+      font-size: 28px;
+      color: #f5576c;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .btn-finalizar {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(245, 87, 108, 0.3);
+    }
+
+    .btn-finalizar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 87, 108, 0.5);
+    }
+
+    .btn-finalizar:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .carrinho-vazio {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .carrinho-vazio h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .carrinho-vazio a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .carrinho-vazio a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>👟 MG Calçados</h1>
+  <nav>
+    <a href="index.html">🏠 Voltar</a>
+    <a href="index.html">🛍️ Continuar Comprando</a>
+  </nav>
+</header>
+
+<div class="container-carrinho">
+  <div class="header-carrinho">
+    <h1>🛒 Seu Carrinho</h1>
+    <button class="btn-voltar" onclick="window.location.href='index.html'">← Voltar às Compras</button>
+  </div>
+
+  <div class="info-carrinho">
+    <h3 id="qtd"></h3>
+  </div>
+
+  <div id="lista"></div>
+
+  <div class="resumo" id="resumo-container" style="display: none;">
+    <h2>📋 Resumo do Pedido</h2>
+    <h2 id="total"></h2>
+    <button class="btn-finalizar" onclick="finalizarPedido()">✅ Finalizar Compra</button>
+  </div>
+
+  <div class="carrinho-vazio" id="vazio" style="display: none;">
+    <h2>🎒 Seu carrinho está vazio</h2>
+    <p>Explore nossa coleção e encontre os melhores produtos</p>
+    <a href="index.html">Voltar às Compras</a>
+  </div>
+</div>
+
+<script>
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+if (carrinho.length === 0) {
+  document.getElementById("vazio").style.display = "block";
+  document.getElementById("qtd").innerText = "Nenhum item no carrinho";
+} else {
+  document.getElementById("resumo-container").style.display = "block";
+  
+  document.getElementById("qtd").innerText = 
+    `📦 Quantidade de itens: ${carrinho.length}`;
+
+  let total = 0;
+  const lista = document.getElementById("lista");
+
+  carrinho.forEach((item, index) => {
+    total += item.preco;
+
+    lista.innerHTML += `
+      <div class="item-carrinho">
+        <img src="${item.imagem}" alt="${item.nome}">
+        <div class="item-info">
+          <p>${item.nome}</p>
+          <div>
+            <span>Opção #:</span> <p>${item.opcao || '—'}</p>
+            <span>Cor:</span> <p>${item.cor}</p>
+            <span>Tamanho:</span> <p>${item.tamanho}</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: space-between; text-align: right;">
+          <p class="preco-item">R$ ${item.preco.toFixed(2)}</p>
+          <button class="btn-remover" onclick="removerItem(${index})">🗑️ Remover</button>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById("total").innerText = 
+    `💰 Total: R$ ${total.toFixed(2)}`;
+}
+
+function removerItem(index) {
+  carrinho.splice(index, 1);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  location.reload();
+}
+
+function finalizarPedido() {
+  if (carrinho.length > 0) {
+    const total = carrinho.reduce((acc, item) => acc + item.preco, 0);
+    const mensagem = `Olá! Gostaria de finalizar meu pedido. Total: R$ ${total.toFixed(2)}`;
+    const telefone = "5565999483124";
+    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+    window.open(url, "_blank");
+  }
+}
+</script>
+
+</body>
+</html>

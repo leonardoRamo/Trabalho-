@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Produto - MG Calçados</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .container-produto {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .btn-voltar {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-voltar:hover {
+      transform: translateX(-5px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .header-produto {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .header-produto h1 {
+      font-size: 36px;
+      color: #333;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .header-produto p {
+      font-size: 32px;
+      color: #f5576c;
+      font-weight: 700;
+      min-width: 150px;
+      text-align: right;
+    }
+
+    #opcoes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .card-variacao {
+      border: 2px solid #e0e0e0;
+      padding: 20px;
+      border-radius: 15px;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .card-variacao:hover {
+      border-color: #667eea;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .card-variacao img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card-variacao h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .card-variacao p {
+      color: #667eea;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .card-variacao select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid #667eea;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      background: white;
+    }
+
+    .card-variacao button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+    }
+
+    .card-variacao button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 87, 108, 0.5);
+    }
+
+    .card-variacao button:active {
+      transform: translateY(0);
+    }
+
+    .numero-opcao {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      line-height: 35px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>👟 MG Calçados</h1>
+  <nav>
+    <a href="index.html">🏠 Voltar</a>
+    <a href="carrinho.html">🛒 Carrinho</a>
+  </nav>
+</header>
+
+<div class="container-produto">
+  <button class="btn-voltar" onclick="history.back()">← Voltar</button>
+  
+  <div class="header-produto">
+    <h1 id="nome">Carregando...</h1>
+    <p id="preco">R$ 0,00</p>
+  </div>
+
+  <div id="opcoes"></div>
+</div>
+
+<script>
+// Dados dos produtos
+const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+const produtoID = parseInt(localStorage.getItem("produtoID"));
+
+console.log("Produtos carregados:", produtos.length);
+console.log("ID do produto:", produtoID);
+
+// Container do carrinho
+const opcoes = document.getElementById("opcoes");
+
+if (!produtos || produtos.length === 0 || !produtoID) {
+  opcoes.innerHTML = `
+    <div style="grid-column: 1/-1; padding: 40px; text-align: center; background: white; border-radius: 10px;">
+      <h2 style="color: #f5576c;">❌ Erro ao carregar produto</h2>
+      <p>Produto não encontrado. <a href="index.html" style="color: #667eea; text-decoration: underline;">Voltar para início</a></p>
+    </div>
+  `;
+} else {
+  const produto = produtos.find(p => p.id === produtoID);
+  
+  console.log("Produto encontrado:", produto);
+
+  if (!produto) {
+    opcoes.innerHTML = `
+      <div style="grid-column: 1/-1; padding: 40px; text-align: center; background: white; border-radius: 10px;">
+        <h2 style="color: #f5576c;">❌ Produto não encontrado</h2>
+        <p>ID: ${produtoID} não existe. <a href="index.html" style="color: #667eea; text-decoration: underline;">Voltar para início</a></p>
+      </div>
+    `;
+  } else {
+    document.getElementById("nome").innerText = produto.nome;
+    document.getElementById("preco").innerText = "R$ " + produto.preco.toFixed(2);
+
+    opcoes.innerHTML = "";
+
+    // CRIAR VARIAÇÕES COM NUMERAÇÃO
+    produto.variacoes.forEach((v, i) => {
+      const card = document.createElement("div");
+      card.className = "card-variacao";
+      card.innerHTML = `
+        <div class="numero-opcao">${i + 1}</div>
+        <img src="${v.img}" alt="${produto.nome}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+        <h3>${produto.nome}</h3>
+        <p>🎨 Cor: ${v.cor}</p>
+
+        <select id="tam_${i}" class="select-tamanho">
+          <option value="37">📏 Tamanho 37</option>
+          <option value="38">📏 Tamanho 38</option>
+          <option value="39">📏 Tamanho 39</option>
+          <option value="40">📏 Tamanho 40</option>
+          <option value="41">📏 Tamanho 41</option>
+          <option value="42">📏 Tamanho 42</option>
+        </select>
+
+        <button type="button" onclick="adicionarCarrinhoFunc(${i})">🛒 Adicionar #${i + 1}</button>
+      `;
+      opcoes.appendChild(card);
+    });
+  }
+}
+
+function adicionarCarrinhoFunc(indice) {
+  console.log("=== ADICIONANDO AO CARRINHO ===");
+  console.log("Índice:", indice);
+  
+  const produto = produtos.find(p => p.id === produtoID);
+  
+  if (!produto) {
+    console.error("❌ Produto não encontrado!");
+    alert("❌ Erro: Produto não encontrado!");
+    return;
+  }
+
+  const tamanhoSelect = document.getElementById("tam_" + indice);
+  if (!tamanhoSelect) {
+    console.error("❌ Select de tamanho não encontrado para índice:", indice);
+    alert("❌ Erro: Selecione um tamanho!");
+    return;
+  }
+
+  const tamanho = tamanhoSelect.value;
+  console.log("Tamanho selecionado:", tamanho);
+
+  const item = {
+    nome: produto.nome,
+    preco: produto.preco,
+    cor: produto.variacoes[indice].cor,
+    tamanho: tamanho,
+    imagem: produto.variacoes[indice].img,
+    opcao: indice + 1
+  };
+
+  console.log("Item criado:", item);
+
+  // Adicionar ao carrinho
+  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+  
+  if (!Array.isArray(carrinho)) {
+    console.warn("Carrinho não era array, resetando:", carrinho);
+    carrinho = [];
+  }
+  
+  carrinho.push(item);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+  console.log("Carrinho após adicionar:", carrinho);
+  console.log("Total de itens:", carrinho.length);
+
+  alert(`✅ Produto #${indice + 1} (${item.cor}) - Tamanho ${tamanho} adicionado ao carrinho!`);
+  
+  // Pequeno delay antes de redirecionar
+  setTimeout(() => {
+    window.location.href = "carrinho.html";
+  }, 500);
+}
+</script>
+
+</body>
+</html>

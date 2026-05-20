@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento - MG Calçados</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .container-pagamento {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .header-pagamento {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header-pagamento h1 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .opcoes-pagamento {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .card-pagamento {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 3px solid transparent;
+    }
+
+    .card-pagamento:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+      border-color: #667eea;
+    }
+
+    .card-pagamento.ativo {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .card-pagamento h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .card-pagamento p {
+      font-size: 14px;
+      color: #999;
+      margin: 0;
+    }
+
+    .card-pagamento.ativo p {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .resumo-pedido {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+      margin-bottom: 30px;
+      border: 2px solid #667eea;
+    }
+
+    .resumo-pedido h2 {
+      color: #333;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .item-resumo {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #e0e0e0;
+      color: #333;
+    }
+
+    .item-resumo:last-child {
+      border-bottom: none;
+    }
+
+    .item-resumo .preco {
+      font-weight: 700;
+      color: #f5576c;
+    }
+
+    .total-resumo {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-top: 2px solid #667eea;
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .total-resumo .valor {
+      color: #f5576c;
+    }
+
+    .pix-container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      display: none;
+    }
+
+    .pix-container.ativo {
+      display: block;
+    }
+
+    .qrcode-container {
+      background: #f5f7fa;
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+      margin: 20px 0;
+    }
+
+    .qrcode-container img {
+      width: 280px;
+      height: 280px;
+    }
+
+    .chave-pix {
+      background: #f5f7fa;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      font-family: monospace;
+      font-weight: 700;
+      color: #333;
+      word-break: break-all;
+      border: 2px solid #667eea;
+    }
+
+    .btn-copiar {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      margin: 10px;
+    }
+
+    .btn-copiar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-finalizar {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(245, 87, 108, 0.3);
+      margin-top: 20px;
+    }
+
+    .btn-finalizar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 87, 108, 0.5);
+    }
+
+    .mensagem-sucesso {
+      background: #4ade80;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: center;
+      display: none;
+    }
+
+    .mensagem-sucesso.ativo {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>👟 MG Calçados</h1>
+  <nav>
+    <a href="index.html">🏠 Voltar</a>
+    <a href="carrinho.html">🛒 Carrinho</a>
+  </nav>
+</header>
+
+<div class="container-pagamento">
+  <div class="header-pagamento">
+    <h1>💳 Escolha a Forma de Pagamento</h1>
+    <p>Selecione o método mais conveniente para você</p>
+  </div>
+
+  <div class="resumo-pedido">
+    <h2>📦 Resumo do Pedido</h2>
+    <div id="itens-resumo"></div>
+    <div class="total-resumo">
+      <span>Total:</span>
+      <span class="valor" id="total-valor">R$ 0,00</span>
+    </div>
+  </div>
+
+  <div class="opcoes-pagamento">
+    <div class="card-pagamento ativo" onclick="selecionarPagamento('pix')">
+      <h3>🏦 PIX</h3>
+      <p>Transferência instantânea</p>
+    </div>
+    <div class="card-pagamento" onclick="selecionarPagamento('credito')">
+      <h3>💳 Cartão de Crédito</h3>
+      <p>Parcelado em até 12x</p>
+    </div>
+    <div class="card-pagamento" onclick="selecionarPagamento('boleto')">
+      <h3>📋 Boleto</h3>
+      <p>Vence em 3 dias úteis</p>
+    </div>
+  </div>
+
+  <div class="pix-container ativo">
+    <h2>📱 Pagamento via PIX</h2>
+    <p>Escaneie o código QR abaixo com o app do seu banco ou copie a chave PIX</p>
+    
+    <div class="qrcode-container">
+      <img id="qrcode" alt="QR Code PIX">
+    </div>
+
+    <div style="background: #e8f4fd; padding: 15px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #667eea;">
+      <h4 style="margin: 0 0 10px 0; color: #333;">📋 Como pagar:</h4>
+      <ol style="text-align: left; margin: 0; padding-left: 20px; color: #555;">
+        <li>Abra o app do seu banco</li>
+        <li>Escolha a opção PIX</li>
+        <li>Escaneie o QR code acima OU copie a chave abaixo</li>
+        <li>Confirme o pagamento</li>
+        <li>Clique em "Já Pagou? Confirmar" abaixo</li>
+      </ol>
+    </div>
+
+    <p>Ou copie a chave PIX:</p>
+    <div class="chave-pix" id="chave-pix">65999483124</div>
+    
+    <button class="btn-copiar" onclick="copiarChavePix()">📋 Copiar Chave</button>
+    
+    <button class="btn-finalizar" onclick="confirmarPagamentoPIX()">✅ Já Paguei via PIX - Confirmar Pedido</button>
+  </div>
+
+  <div class="pix-container">
+    <h2>💳 Pagamento com Cartão de Crédito</h2>
+    <p>Preencha os dados do seu cartão</p>
+    
+    <form style="margin-top: 20px;">
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; text-align: left;">Número do Cartão</label>
+        <input type="text" placeholder="0000 0000 0000 0000" maxlength="19" style="width: 100%; padding: 12px; border: 2px solid #667eea; border-radius: 8px;">
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div>
+          <label style="display: block; margin-bottom: 5px;">Validade</label>
+          <input type="text" placeholder="MM/AA" maxlength="5" style="width: 100%; padding: 12px; border: 2px solid #667eea; border-radius: 8px;">
+        </div>
+        <div>
+          <label style="display: block; margin-bottom: 5px;">CVV</label>
+          <input type="text" placeholder="000" maxlength="3" style="width: 100%; padding: 12px; border: 2px solid #667eea; border-radius: 8px;">
+        </div>
+      </div>
+      <button class="btn-finalizar" type="button" onclick="confirmarPagamento('credito')">💳 Processar Pagamento</button>
+    </form>
+  </div>
+
+  <div class="pix-container">
+    <h2>📋 Pagamento com Boleto</h2>
+    <p>Código de barras gerado automaticamente</p>
+    
+    <div style="background: white; padding: 30px; border: 2px solid #667eea; border-radius: 10px; margin: 30px 0; font-family: monospace; font-weight: 700; word-break: break-all;">
+      12345.67890 12345.678901 12345.678901 1 12345678901234
+    </div>
+    
+    <button class="btn-finalizar" onclick="confirmarPagamento('boleto')">📥 Gerar Boleto PDF</button>
+  </div>
+
+  <div class="mensagem-sucesso" id="mensagem-sucesso">
+    <h3>✅ Pagamento Confirmado!</h3>
+    <p>Seu pedido foi recebido com sucesso. Você receberá um email com os detalhes.</p>
+  </div>
+</div>
+
+<script>
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+let total = carrinho.reduce((soma, item) => soma + item.preco, 0);
+
+// Renderizar resumo
+const resumoContainer = document.getElementById("itens-resumo");
+carrinho.forEach(item => {
+  resumoContainer.innerHTML += `
+    <div class="item-resumo">
+      <span>${item.nome} (${item.cor}) - Tam ${item.tamanho}</span>
+      <span class="preco">R$ ${item.preco.toFixed(2)}</span>
+    </div>
+  `;
+});
+
+document.getElementById("total-valor").innerText = "R$ " + total.toFixed(2);
+
+// QR CODE PIX
+const chavePix = "65999483124";
+
+// String PIX simplificada (funciona com a maioria dos bancos)
+const pixString = `00020126360014br.gov.bcb.pix0113${chavePix}5204000053039865802BR5913MG Calcados6009SAO PAULO62070503***6304`;
+
+document.getElementById("qrcode").src =
+  `https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=${encodeURIComponent(pixString)}`;
+
+function selecionarPagamento(tipo) {
+  // Atualizar cards
+  document.querySelectorAll(".card-pagamento").forEach(card => {
+    card.classList.remove("ativo");
+  });
+  event.target.closest(".card-pagamento").classList.add("ativo");
+
+  // Atualizar containers
+  document.querySelectorAll(".pix-container").forEach(container => {
+    container.classList.remove("ativo");
+  });
+
+  const indice = ["pix", "credito", "boleto"].indexOf(tipo);
+  document.querySelectorAll(".pix-container")[indice].classList.add("ativo");
+}
+
+function copiarChavePix() {
+  const chave = document.getElementById("chave-pix").innerText;
+  navigator.clipboard.writeText(chave).then(() => {
+    alert("✅ Chave PIX copiada com sucesso!");
+  });
+}
+
+function confirmarPagamento(tipo) {
+  console.log("=== CONFIRMANDO PAGAMENTO ===");
+  console.log("Tipo de pagamento:", tipo);
+
+  if (tipo === 'pix') {
+    console.log("Processando PIX - apenas confirma, não abre WhatsApp");
+    // Para PIX, apenas confirma e limpa o carrinho
+    localStorage.setItem("carrinho", JSON.stringify([]));
+    document.getElementById("mensagem-sucesso").classList.add("ativo");
+    alert("✅ Pagamento via PIX confirmado! Obrigado pela compra.");
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 3000);
+  } else {
+    console.log("Processando", tipo, "- abrindo WhatsApp");
+    // Para outros métodos, ainda abre WhatsApp
+    localStorage.setItem("carrinho", JSON.stringify([]));
+
+    const mensagem = `Olá! Realizei o pagamento de R$ ${total.toFixed(2)} via ${tipo.toUpperCase()}. Pedido confirmado!`;
+    const telefone = "5565999483124";
+    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(url, "_blank");
+
+    document.getElementById("mensagem-sucesso").classList.add("ativo");
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 3000);
+  }
+}
+
+function confirmarPagamentoPIX() {
+  console.log("=== CONFIRMANDO PAGAMENTO PIX ===");
+  console.log("Apenas confirmando PIX - NÃO abre WhatsApp");
+
+  // Limpar carrinho
+  localStorage.setItem("carrinho", JSON.stringify([]));
+
+  // Mostrar mensagem de sucesso
+  document.getElementById("mensagem-sucesso").classList.add("ativo");
+
+  // Alert de confirmação
+  alert("✅ Pagamento via PIX confirmado com sucesso!\n\nObrigado pela sua compra!\n\nVocê será redirecionado para a página inicial em 3 segundos.");
+
+  // Redirecionar após 3 segundos
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 3000);
+}

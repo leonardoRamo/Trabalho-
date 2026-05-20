@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug - MG Calçados</title>
+</head>
+<body>
+  <h1>🔧 Debug do Carrinho</h1>
+
+  <h2>Status do localStorage:</h2>
+  <div id="status"></div>
+
+  <h2>Produtos salvos:</h2>
+  <div id="produtos"></div>
+
+  <h2>Carrinho atual:</h2>
+  <div id="carrinho"></div>
+
+  <button onclick="limparCarrinho()">🗑️ Limpar Carrinho</button>
+  <button onclick="adicionarTeste()">➕ Adicionar Item de Teste</button>
+  <a href="index.html">🏠 Voltar ao Site</a>
+
+  <script>
+    function atualizarStatus() {
+      const status = document.getElementById("status");
+      const produtos = document.getElementById("produtos");
+      const carrinho = document.getElementById("carrinho");
+
+      // Status localStorage
+      try {
+        const lsProdutos = localStorage.getItem("produtos");
+        const lsCarrinho = localStorage.getItem("carrinho");
+        const lsProdutoID = localStorage.getItem("produtoID");
+
+        status.innerHTML = `
+          <p>✅ localStorage funcionando</p>
+          <p>Produtos: ${lsProdutos ? '✅ Salvo' : '❌ Não encontrado'}</p>
+          <p>Carrinho: ${lsCarrinho ? '✅ Salvo' : '❌ Não encontrado'}</p>
+          <p>ProdutoID: ${lsProdutoID || 'Nenhum'}</p>
+        `;
+
+        // Produtos
+        if (lsProdutos) {
+          const prods = JSON.parse(lsProdutos);
+          produtos.innerHTML = `<p>${prods.length} produtos carregados</p>`;
+        } else {
+          produtos.innerHTML = `<p>❌ Nenhum produto encontrado</p>`;
+        }
+
+        // Carrinho
+        if (lsCarrinho) {
+          const cart = JSON.parse(lsCarrinho);
+          if (Array.isArray(cart) && cart.length > 0) {
+            carrinho.innerHTML = `<p>${cart.length} itens no carrinho:</p><ul>`;
+            cart.forEach((item, i) => {
+              carrinho.innerHTML += `<li>${i+1}. ${item.nome} - ${item.cor} - Tamanho ${item.tamanho} - R$ ${item.preco}</li>`;
+            });
+            carrinho.innerHTML += `</ul>`;
+          } else {
+            carrinho.innerHTML = `<p>Carrinho vazio</p>`;
+          }
+        } else {
+          carrinho.innerHTML = `<p>❌ Carrinho não inicializado</p>`;
+        }
+
+      } catch (error) {
+        status.innerHTML = `<p>❌ Erro no localStorage: ${error.message}</p>`;
+      }
+    }
+
+    function limparCarrinho() {
+      localStorage.setItem("carrinho", JSON.stringify([]));
+      atualizarStatus();
+      alert("Carrinho limpo!");
+    }
+
+    function adicionarTeste() {
+      const itemTeste = {
+        nome: "Item de Teste",
+        preco: 99.90,
+        cor: "Azul",
+        tamanho: "42",
+        imagem: "https://via.placeholder.com/200",
+        opcao: 1
+      };
+
+      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+      carrinho.push(itemTeste);
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+      atualizarStatus();
+      alert("Item de teste adicionado!");
+    }
+
+    // Atualizar ao carregar
+    atualizarStatus();
+  </script>
+</body>
+</html>
