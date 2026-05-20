@@ -204,6 +204,18 @@
 const STORAGE_PRODUTOS = "produtos";
 const STORAGE_CARRINHO = "carrinho";
 
+function formatarPreco(valor) {
+  const numero = Number(valor);
+  if (Number.isNaN(numero)) return "0,00";
+  return numero.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function parsePreco(valorTexto) {
+  if (valorTexto === null || valorTexto === undefined) return NaN;
+  const texto = String(valorTexto).trim().replace(/\./g, "").replace(/,/g, ".");
+  return Number(texto);
+}
+
 function getProdutosStorage() {
   const local = localStorage.getItem(STORAGE_PRODUTOS);
   if (!local) {
@@ -248,15 +260,26 @@ function carregarProdutos(lista) {
 
   lista.forEach(p => {
     const imagem = p.variacoes[0]?.img || "https://via.placeholder.com/640x480?text=Sem+imagem";
+    const coresHtml = p.variacoes.map((v, i) => ` <span class="swatch" data-prod="${p.id}" data-idx="${i}" title="${v.cor}" style="background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));"></span>`).join("");
     container.innerHTML += `
-      <div class="produto">
-        <img src="${imagem}" alt="${p.nome}">
-        <h3>${p.nome}</h3>
-        <p>R$ ${p.preco.toFixed(2)}</p>
-        <button onclick="abrirProduto(${p.id})">Ver opções</button>
+      <div class="produto" data-id="${p.id}">
+        <img src="${imagem}" alt="${p.nome}" id="img-prod-${p.id}">
+        <div class="produto-body">
+          <h3>${p.nome}</h3>
+          <div class="swatches">${coresHtml}</div>
+          <p class="cores">${p.variacoes.map(v => v.cor).join(", ")}</p>
+          <div class="preco">R$ ${formatarPreco(p.preco)}</div>
+          <div class="acoes">
+            <button class="btn-ver" onclick="abrirProduto(${p.id})">Ver opções</button>
+            <button class="btn-add" onclick="adicionarCarrinhoPorId(${p.id}, 0)">Adicionar</button>
+          </div>
+        </div>
       </div>
     `;
   });
+
+  // inicializa comportamentos de swatches depois da renderização
+  setTimeout(() => inicializarSwatches(), 50);
 }
 
 function aplicarFiltros() {
@@ -301,6 +324,62 @@ function adicionarCarrinho(item) {
   atualizarQtdCarrinho();
 }
 
+function adicionarCarrinhoPorId(prodId, varIndex = 0) {
+  const produtosAtuais = getProdutosStorage();
+  const produto = produtosAtuais.find(p => p.id === prodId);
+  if (!produto) return;
+  const variacao = produto.variacoes[varIndex] || produto.variacoes[0] || { cor: 'Padrão', img: '' };
+  const item = {
+    id: produto.id,
+    nome: produto.nome,
+    preco: produto.preco,
+    cor: variacao.cor,
+    img: variacao.img
+  };
+  adicionarCarrinho(item);
+  apresentarMensagemCMS('Item adicionado ao carrinho', 'success');
+}
+
+function alterarVariacao(prodId, idx) {
+  const imgEl = document.getElementById(`img-prod-${prodId}`);
+  const produtosAtuais = getProdutosStorage();
+  const produto = produtosAtuais.find(p => p.id === prodId);
+  if (!produto) return;
+  const variacao = produto.variacoes[idx];
+  if (variacao && imgEl) imgEl.src = variacao.img;
+  // marcar swatch selecionado
+  document.querySelectorAll(`.swatch[data-prod="${prodId}"]`).forEach(s => s.classList.remove('selected'));
+  const sw = document.querySelector(`.swatch[data-prod="${prodId}"][data-idx="${idx}"]`);
+  if (sw) sw.classList.add('selected');
+}
+
+function inicializarSwatches() {
+  document.querySelectorAll('.swatch').forEach(sw => {
+    const prodId = Number(sw.getAttribute('data-prod'));
+    const idx = Number(sw.getAttribute('data-idx'));
+    // tentar aplicar cor visual baseando-se no texto (fallback estético)
+    const produtosAtuais = getProdutosStorage();
+    const produto = produtosAtuais.find(p => p.id === prodId);
+    if (produto) {
+      const cor = produto.variacoes[idx]?.cor || '';
+      // tentar mapear cores comuns para cores hex simples
+      const mapa = {
+        'Preto':'#161616','Branco':'#f8fafc','Vermelho':'#d62c2c','Azul':'#1e40af','Azul Neon':'#06b6d4','Roxo':'#7c3aed','Rosa':'#f472b6','Cinza':'#6b7280','Marrom':'#7c4a2a','Bege':'#e6d6c3','Laranja':'#ff6b00','Verde':'#16a34a'
+      };
+      const corHex = mapa[cor] || '#cbd5e1';
+      sw.style.background = corHex;
+    }
+
+    sw.addEventListener('click', () => {
+      alterarVariacao(prodId, idx);
+      // atualizar botão adicionar para usar essa variação
+      const produtoEl = document.querySelector(`.produto[data-id="${prodId}"]`);
+      const btn = produtoEl?.querySelector('.btn-add');
+      if (btn) btn.setAttribute('onclick', `adicionarCarrinhoPorId(${prodId}, ${idx})`);
+    });
+  });
+}
+
 function toggleCMS() {
   const painel = document.getElementById("cmsPanel");
   if (!painel) return;
@@ -333,7 +412,7 @@ function construirListaCMS() {
 
   tabela.innerHTML = produtosAtuais.map(produto => `
     <div class="product-row">
-      <span>${produto.nome} (${produto.categoria}) - R$ ${produto.preco.toFixed(2)}</span>
+      <span>${produto.nome} (${produto.categoria}) - R$ ${formatarPreco(produto.preco)}</span>
       <span>${produto.variacoes.map(v => v.cor).join(", ")}</span>
       <button type="button" class="btn-editar" onclick="abrirEdicaoProduto(${produto.id})">Editar</button>
       <button type="button" class="btn-remover" onclick="removerProduto(${produto.id})">Excluir</button>
@@ -349,7 +428,7 @@ function abrirEdicaoProduto(id) {
   document.getElementById("produtoId").value = produto.id;
   document.getElementById("produtoNome").value = produto.nome;
   document.getElementById("produtoCategoria").value = produto.categoria;
-  document.getElementById("produtoPreco").value = produto.preco;
+  document.getElementById("produtoPreco").value = formatarPreco(produto.preco);
   document.getElementById("produtoImagem").value = produto.variacoes[0]?.img || "";
   document.getElementById("produtoCores").value = produto.variacoes.map(v => v.cor).join(", ");
   apresentarMensagemCMS(`Editando produto ID ${id}`);
@@ -380,7 +459,8 @@ function salvarProdutoCMS(event) {
   const idCampo = document.getElementById("produtoId").value;
   const nome = document.getElementById("produtoNome").value.trim();
   const categoria = document.getElementById("produtoCategoria").value;
-  const preco = Number(document.getElementById("produtoPreco").value);
+  const precoTexto = document.getElementById("produtoPreco").value;
+  const preco = parsePreco(precoTexto);
   const imagem = document.getElementById("produtoImagem").value.trim() || "https://via.placeholder.com/640x480?text=Imagem+não+disponível";
   const cores = document.getElementById("produtoCores").value;
 

@@ -316,18 +316,24 @@
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 let total = carrinho.reduce((soma, item) => soma + item.preco, 0);
 
+function formatarPreco(valor) {
+  const numero = Number(valor);
+  if (Number.isNaN(numero)) return "0,00";
+  return numero.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 // Renderizar resumo
 const resumoContainer = document.getElementById("itens-resumo");
 carrinho.forEach(item => {
   resumoContainer.innerHTML += `
     <div class="item-resumo">
       <span>${item.nome} (${item.cor}) - Tam ${item.tamanho}</span>
-      <span class="preco">R$ ${item.preco.toFixed(2)}</span>
+      <span class="preco">R$ ${formatarPreco(item.preco)}</span>
     </div>
   `;
 });
 
-document.getElementById("total-valor").innerText = "R$ " + total.toFixed(2);
+document.getElementById("total-valor").innerText = "R$ " + formatarPreco(total);
 
 // QR CODE PIX
 const chavePix = "65999483124";
@@ -379,7 +385,7 @@ function confirmarPagamento(tipo) {
     // Para outros métodos, ainda abre WhatsApp
     localStorage.setItem("carrinho", JSON.stringify([]));
 
-    const mensagem = `Olá! Realizei o pagamento de R$ ${total.toFixed(2)} via ${tipo.toUpperCase()}. Pedido confirmado!`;
+    const mensagem = `Olá! Realizei o pagamento de R$ ${formatarPreco(total)} via ${tipo.toUpperCase()}. Pedido confirmado!`;
     const telefone = "5565999483124";
     const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
 

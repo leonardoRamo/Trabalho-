@@ -249,6 +249,12 @@
 </div>
 
 <script>
+function formatarPreco(valor) {
+  const numero = Number(valor);
+  if (Number.isNaN(numero)) return "0,00";
+  return numero.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
 if (carrinho.length === 0) {
@@ -278,7 +284,7 @@ if (carrinho.length === 0) {
           </div>
         </div>
         <div style="display: flex; flex-direction: column; justify-content: space-between; text-align: right;">
-          <p class="preco-item">R$ ${item.preco.toFixed(2)}</p>
+          <p class="preco-item">R$ ${formatarPreco(item.preco)}</p>
           <button class="btn-remover" onclick="removerItem(${index})">🗑️ Remover</button>
         </div>
       </div>
@@ -286,7 +292,7 @@ if (carrinho.length === 0) {
   });
 
   document.getElementById("total").innerText = 
-    `💰 Total: R$ ${total.toFixed(2)}`;
+    `💰 Total: R$ ${formatarPreco(total)}`;
 }
 
 function removerItem(index) {
@@ -298,7 +304,7 @@ function removerItem(index) {
 function finalizarPedido() {
   if (carrinho.length > 0) {
     const total = carrinho.reduce((acc, item) => acc + item.preco, 0);
-    const mensagem = `Olá! Gostaria de finalizar meu pedido. Total: R$ ${total.toFixed(2)}`;
+    const mensagem = `Olá! Gostaria de finalizar meu pedido. Total: R$ ${formatarPreco(total)}`;
     const telefone = "5565999483124";
     const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");

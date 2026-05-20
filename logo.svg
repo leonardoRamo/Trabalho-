@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <rect width="120" height="120" rx="18" fill="#0b3d91"/>
+  <path d="M32 82 L40 36 L58 82 L66 36 L80 82" stroke="#ff6b00" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="60" y="98" font-family="Inter, Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">MG</text>
+</svg>

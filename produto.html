@@ -200,7 +200,7 @@ if (!produtos || produtos.length === 0 || !produtoID) {
     `;
   } else {
     document.getElementById("nome").innerText = produto.nome;
-    document.getElementById("preco").innerText = "R$ " + produto.preco.toFixed(2);
+    document.getElementById("preco").innerText = "R$ " + produto.preco.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     opcoes.innerHTML = "";
 
