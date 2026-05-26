@@ -5,10 +5,10 @@
     categoria: "masculino",
     preco: 349.9,
     variacoes: [
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=640&h=480&fit=crop" },
-      { cor: "Branco", img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=640&h=480&fit=crop" },
-      { cor: "Vermelho", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Azul Neon", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=640&h=480&fit=crop" }
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-sneakers" },
+      { cor: "Branco", img: "https://source.unsplash.com/640x480/?white-sneakers" },
+      { cor: "Vermelho", img: "https://source.unsplash.com/640x480/?red-sneakers" },
+      { cor: "Azul Neon", img: "https://source.unsplash.com/640x480/?blue-sneakers" }
     ]
   },
   {
@@ -17,9 +17,9 @@
     categoria: "masculino",
     preco: 89.9,
     variacoes: [
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=640&h=480&fit=crop" },
-      { cor: "Azul", img: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=640&h=480&fit=crop" },
-      { cor: "Cinza", img: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=640&h=480&fit=crop" }
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-flipflops" },
+      { cor: "Azul", img: "https://source.unsplash.com/640x480/?blue-flipflops" },
+      { cor: "Cinza", img: "https://source.unsplash.com/640x480/?gray-flipflops" }
     ]
   },
   {
@@ -28,9 +28,9 @@
     categoria: "masculino",
     preco: 249.9,
     variacoes: [
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=640&h=480&fit=crop" },
-      { cor: "Marrom", img: "https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=640&h=480&fit=crop" },
-      { cor: "Vinho", img: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=640&h=480&fit=crop" }
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-dress-shoes" },
+      { cor: "Marrom", img: "https://source.unsplash.com/640x480/?brown-dress-shoes" },
+      { cor: "Vinho", img: "https://source.unsplash.com/640x480/?wine-red-dress-shoes" }
     ]
   },
   {
@@ -39,10 +39,10 @@
     categoria: "feminino",
     preco: 329.9,
     variacoes: [
-      { cor: "Branco", img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=640&h=480&fit=crop" },
-      { cor: "Rosa", img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=640&h=480&fit=crop" },
-      { cor: "Roxo", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Cinza", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=640&h=480&fit=crop" }
+      { cor: "Branco", img: "https://source.unsplash.com/640x480/?white-womens-sneakers" },
+      { cor: "Rosa", img: "https://source.unsplash.com/640x480/?pink-womens-sneakers" },
+      { cor: "Roxo", img: "https://source.unsplash.com/640x480/?purple-womens-sneakers" },
+      { cor: "Cinza", img: "https://source.unsplash.com/640x480/?gray-womens-sneakers" }
     ]
   },
   {
@@ -51,9 +51,9 @@
     categoria: "feminino",
     preco: 199.9,
     variacoes: [
-      { cor: "Bege", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Preta", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Ouro", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" }
+      { cor: "Bege", img: "https://source.unsplash.com/640x480/?beige-sandals" },
+      { cor: "Preta", img: "https://source.unsplash.com/640x480/?black-sandals" },
+      { cor: "Ouro", img: "https://source.unsplash.com/640x480/?gold-sandals" }
     ]
   },
   {
@@ -62,9 +62,9 @@
     categoria: "feminino",
     preco: 79.9,
     variacoes: [
-      { cor: "Rosa", img: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=640&h=480&fit=crop" },
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=640&h=480&fit=crop" },
-      { cor: "Branco", img: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=640&h=480&fit=crop" }
+      { cor: "Rosa", img: "https://source.unsplash.com/640x480/?pink-flipflops" },
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-flipflops" },
+      { cor: "Branco", img: "https://source.unsplash.com/640x480/?white-flipflops" }
     ]
   },
   {
@@ -73,9 +73,9 @@
     categoria: "feminino",
     preco: 290.9,
     variacoes: [
-      { cor: "Preta", img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=640&h=480&fit=crop" },
-      { cor: "Bege", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=640&h=480&fit=crop" },
-      { cor: "Vermelha", img: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=640&h=480&fit=crop" }
+      { cor: "Preta", img: "https://source.unsplash.com/640x480/?black-handbag" },
+      { cor: "Bege", img: "https://source.unsplash.com/640x480/?beige-handbag" },
+      { cor: "Vermelha", img: "https://source.unsplash.com/640x480/?red-handbag" }
     ]
   },
   {
@@ -84,9 +84,9 @@
     categoria: "masculino",
     preco: 279.9,
     variacoes: [
-      { cor: "Marrom", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Cinza", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" }
+      { cor: "Marrom", img: "https://source.unsplash.com/640x480/?brown-boots" },
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-boots" },
+      { cor: "Cinza", img: "https://source.unsplash.com/640x480/?gray-boots" }
     ]
   },
   {
@@ -95,9 +95,9 @@
     categoria: "feminino",
     preco: 299.9,
     variacoes: [
-      { cor: "Branco Rosa", img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=640&h=480&fit=crop" },
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=640&h=480&fit=crop" },
-      { cor: "Cinza", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" }
+      { cor: "Branco Rosa", img: "https://source.unsplash.com/640x480/?pink-white-sneakers" },
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-womens-sneakers" },
+      { cor: "Cinza", img: "https://source.unsplash.com/640x480/?gray-womens-sneakers" }
     ]
   },
   {
@@ -106,9 +106,9 @@
     categoria: "feminino",
     preco: 149.9,
     variacoes: [
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=640&h=480&fit=crop" },
-      { cor: "Bege", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=640&h=480&fit=crop" },
-      { cor: "Rosa Pastel", img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=640&h=480&fit=crop" }
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-ballet-flats" },
+      { cor: "Bege", img: "https://source.unsplash.com/640x480/?beige-ballet-flats" },
+      { cor: "Rosa Pastel", img: "https://source.unsplash.com/640x480/?pastel-pink-flats" }
     ]
   },
   {
@@ -117,9 +117,9 @@
     categoria: "masculino",
     preco: 459.9,
     variacoes: [
-      { cor: "Azul Royal", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=640&h=480&fit=crop" },
-      { cor: "Laranja", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Verde", img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=640&h=480&fit=crop" }
+      { cor: "Azul Royal", img: "https://source.unsplash.com/640x480/?royal-blue-running-shoes" },
+      { cor: "Laranja", img: "https://source.unsplash.com/640x480/?orange-running-shoes" },
+      { cor: "Verde", img: "https://source.unsplash.com/640x480/?green-running-shoes" }
     ]
   },
   {
@@ -128,9 +128,9 @@
     categoria: "masculino",
     preco: 189.9,
     variacoes: [
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=640&h=480&fit=crop" },
-      { cor: "Marrom Claro", img: "https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=640&h=480&fit=crop" },
-      { cor: "Azul", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=640&h=480&fit=crop" }
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-casual-shoes" },
+      { cor: "Marrom Claro", img: "https://source.unsplash.com/640x480/?light-brown-shoes" },
+      { cor: "Azul", img: "https://source.unsplash.com/640x480/?blue-casual-shoes" }
     ]
   },
   {
@@ -139,9 +139,9 @@
     categoria: "feminino",
     preco: 349.9,
     variacoes: [
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=640&h=480&fit=crop" },
-      { cor: "Nude", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=640&h=480&fit=crop" },
-      { cor: "Vermelho", img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=640&h=480&fit=crop" }
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-high-heels" },
+      { cor: "Nude", img: "https://source.unsplash.com/640x480/?nude-high-heels" },
+      { cor: "Vermelho", img: "https://source.unsplash.com/640x480/?red-high-heels" }
     ]
   },
   {
@@ -150,9 +150,9 @@
     categoria: "masculino",
     preco: 229.9,
     variacoes: [
-      { cor: "Marrom", img: "https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=640&h=480&fit=crop" },
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=640&h=480&fit=crop" },
-      { cor: "Azul Marinho", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=640&h=480&fit=crop" }
+      { cor: "Marrom", img: "https://source.unsplash.com/640x480/?brown-moccasins" },
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-moccasins" },
+      { cor: "Azul Marinho", img: "https://source.unsplash.com/640x480/?navy-moccasins" }
     ]
   },
   {
@@ -161,9 +161,9 @@
     categoria: "feminino",
     preco: 139.9,
     variacoes: [
-      { cor: "Branco", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Prata", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" }
+      { cor: "Branco", img: "https://source.unsplash.com/640x480/?white-flat-sandals" },
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-flat-sandals" },
+      { cor: "Prata", img: "https://source.unsplash.com/640x480/?silver-flat-sandals" }
     ]
   },
   {
@@ -172,9 +172,9 @@
     categoria: "masculino",
     preco: 319.9,
     variacoes: [
-      { cor: "Preto Branco", img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=640&h=480&fit=crop" },
-      { cor: "Vermelho", img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=640&h=480&fit=crop" },
-      { cor: "Verde Neon", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" }
+      { cor: "Preto Branco", img: "https://source.unsplash.com/640x480/?black-white-skate-shoes" },
+      { cor: "Vermelho", img: "https://source.unsplash.com/640x480/?red-skate-shoes" },
+      { cor: "Verde Neon", img: "https://source.unsplash.com/640x480/?neon-green-skate-shoes" }
     ]
   },
   {
@@ -183,9 +183,9 @@
     categoria: "feminino",
     preco: 379.9,
     variacoes: [
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Marrom", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" },
-      { cor: "Cinza", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=640&h=480&fit=crop" }
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-womens-boots" },
+      { cor: "Marrom", img: "https://source.unsplash.com/640x480/?brown-womens-boots" },
+      { cor: "Cinza", img: "https://source.unsplash.com/640x480/?gray-womens-boots" }
     ]
   },
   {
@@ -194,9 +194,9 @@
     categoria: "feminino",
     preco: 119.9,
     variacoes: [
-      { cor: "Preto", img: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=640&h=480&fit=crop" },
-      { cor: "Branco", img: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=640&h=480&fit=crop" },
-      { cor: "Bege", img: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=640&h=480&fit=crop" }
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-platform-sandals" },
+      { cor: "Branco", img: "https://source.unsplash.com/640x480/?white-platform-sandals" },
+      { cor: "Bege", img: "https://source.unsplash.com/640x480/?beige-platform-sandals" }
     ]
   }
 ];
