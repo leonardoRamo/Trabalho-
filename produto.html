@@ -182,7 +182,209 @@
 
 <script>
 // Dados dos produtos
-const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+const produtosSalvos = JSON.parse(localStorage.getItem("produtos"));
+const produtos = Array.isArray(produtosSalvos) && produtosSalvos.length ? produtosSalvos : [
+  {
+    id: 1,
+    nome: "Tênis Esportivo Premium",
+    categoria: "masculino",
+    preco: 349.9,
+    variacoes: [
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-sneakers" },
+      { cor: "Branco", img: "https://source.unsplash.com/640x480/?white-sneakers" },
+      { cor: "Vermelho", img: "https://source.unsplash.com/640x480/?red-sneakers" },
+      { cor: "Azul Neon", img: "https://source.unsplash.com/640x480/?blue-sneakers" }
+    ]
+  },
+  {
+    id: 2,
+    nome: "Chinelo Masculino Conforto",
+    categoria: "masculino",
+    preco: 89.9,
+    variacoes: [
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-flipflops" },
+      { cor: "Azul", img: "https://source.unsplash.com/640x480/?blue-flipflops" },
+      { cor: "Cinza", img: "https://source.unsplash.com/640x480/?gray-flipflops" }
+    ]
+  },
+  {
+    id: 3,
+    nome: "Sapato Social Executivo",
+    categoria: "masculino",
+    preco: 249.9,
+    variacoes: [
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-dress-shoes" },
+      { cor: "Marrom", img: "https://source.unsplash.com/640x480/?brown-dress-shoes" },
+      { cor: "Vinho", img: "https://source.unsplash.com/640x480/?wine-red-dress-shoes" }
+    ]
+  },
+  {
+    id: 4,
+    nome: "Tênis Feminino Estilo",
+    categoria: "feminino",
+    preco: 329.9,
+    variacoes: [
+      { cor: "Branco", img: "https://source.unsplash.com/640x480/?white-womens-sneakers" },
+      { cor: "Rosa", img: "https://source.unsplash.com/640x480/?pink-womens-sneakers" },
+      { cor: "Roxo", img: "https://source.unsplash.com/640x480/?purple-womens-sneakers" },
+      { cor: "Cinza", img: "https://source.unsplash.com/640x480/?gray-womens-sneakers" }
+    ]
+  },
+  {
+    id: 5,
+    nome: "Sandália Elegante",
+    categoria: "feminino",
+    preco: 199.9,
+    variacoes: [
+      { cor: "Bege", img: "https://source.unsplash.com/640x480/?beige-sandals" },
+      { cor: "Preta", img: "https://source.unsplash.com/640x480/?black-sandals" },
+      { cor: "Ouro", img: "https://source.unsplash.com/640x480/?gold-sandals" }
+    ]
+  },
+  {
+    id: 6,
+    nome: "Chinelo Feminino Moda",
+    categoria: "feminino",
+    preco: 79.9,
+    variacoes: [
+      { cor: "Rosa", img: "https://source.unsplash.com/640x480/?pink-flipflops" },
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-flipflops" },
+      { cor: "Branco", img: "https://source.unsplash.com/640x480/?white-flipflops" }
+    ]
+  },
+  {
+    id: 7,
+    nome: "Bolsa Feminina Luxo",
+    categoria: "feminino",
+    preco: 290.9,
+    variacoes: [
+      { cor: "Preta", img: "https://source.unsplash.com/640x480/?black-handbag" },
+      { cor: "Bege", img: "https://source.unsplash.com/640x480/?beige-handbag" },
+      { cor: "Vermelha", img: "https://source.unsplash.com/640x480/?red-handbag" }
+    ]
+  },
+  {
+    id: 8,
+    nome: "Bota Masculina Casual",
+    categoria: "masculino",
+    preco: 279.9,
+    variacoes: [
+      { cor: "Marrom", img: "https://source.unsplash.com/640x480/?brown-boots" },
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-boots" },
+      { cor: "Cinza", img: "https://source.unsplash.com/640x480/?gray-boots" }
+    ]
+  },
+  {
+    id: 9,
+    nome: "Sneaker Feminina Urbana",
+    categoria: "feminino",
+    preco: 299.9,
+    variacoes: [
+      { cor: "Branco Rosa", img: "https://source.unsplash.com/640x480/?pink-white-sneakers" },
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-womens-sneakers" },
+      { cor: "Cinza", img: "https://source.unsplash.com/640x480/?gray-womens-sneakers" }
+    ]
+  },
+  {
+    id: 10,
+    nome: "Sapatilha Feminina Conforto",
+    categoria: "feminino",
+    preco: 149.9,
+    variacoes: [
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-ballet-flats" },
+      { cor: "Bege", img: "https://source.unsplash.com/640x480/?beige-ballet-flats" },
+      { cor: "Rosa Pastel", img: "https://source.unsplash.com/640x480/?pastel-pink-flats" }
+    ]
+  },
+  {
+    id: 11,
+    nome: "Tênis Running Profissional",
+    categoria: "masculino",
+    preco: 459.9,
+    variacoes: [
+      { cor: "Azul Royal", img: "https://source.unsplash.com/640x480/?royal-blue-running-shoes" },
+      { cor: "Laranja", img: "https://source.unsplash.com/640x480/?orange-running-shoes" },
+      { cor: "Verde", img: "https://source.unsplash.com/640x480/?green-running-shoes" }
+    ]
+  },
+  {
+    id: 12,
+    nome: "Sapato Casual Masculino",
+    categoria: "masculino",
+    preco: 189.9,
+    variacoes: [
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-casual-shoes" },
+      { cor: "Marrom Claro", img: "https://source.unsplash.com/640x480/?light-brown-shoes" },
+      { cor: "Azul", img: "https://source.unsplash.com/640x480/?blue-casual-shoes" }
+    ]
+  },
+  {
+    id: 13,
+    nome: "Salto Alto Feminino Elegante",
+    categoria: "feminino",
+    preco: 349.9,
+    variacoes: [
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-high-heels" },
+      { cor: "Nude", img: "https://source.unsplash.com/640x480/?nude-high-heels" },
+      { cor: "Vermelho", img: "https://source.unsplash.com/640x480/?red-high-heels" }
+    ]
+  },
+  {
+    id: 14,
+    nome: "Moccasin Masculino Premium",
+    categoria: "masculino",
+    preco: 229.9,
+    variacoes: [
+      { cor: "Marrom", img: "https://source.unsplash.com/640x480/?brown-moccasins" },
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-moccasins" },
+      { cor: "Azul Marinho", img: "https://source.unsplash.com/640x480/?navy-moccasins" }
+    ]
+  },
+  {
+    id: 15,
+    nome: "Sandália Feminina Rasteira",
+    categoria: "feminino",
+    preco: 139.9,
+    variacoes: [
+      { cor: "Branco", img: "https://source.unsplash.com/640x480/?white-flat-sandals" },
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-flat-sandals" },
+      { cor: "Prata", img: "https://source.unsplash.com/640x480/?silver-flat-sandals" }
+    ]
+  },
+  {
+    id: 16,
+    nome: "Tênis Skateboard Urbano",
+    categoria: "masculino",
+    preco: 319.9,
+    variacoes: [
+      { cor: "Preto Branco", img: "https://source.unsplash.com/640x480/?black-white-skate-shoes" },
+      { cor: "Vermelho", img: "https://source.unsplash.com/640x480/?red-skate-shoes" },
+      { cor: "Verde Neon", img: "https://source.unsplash.com/640x480/?neon-green-skate-shoes" }
+    ]
+  },
+  {
+    id: 17,
+    nome: "Bota Feminina Fashion",
+    categoria: "feminino",
+    preco: 379.9,
+    variacoes: [
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-womens-boots" },
+      { cor: "Marrom", img: "https://source.unsplash.com/640x480/?brown-womens-boots" },
+      { cor: "Cinza", img: "https://source.unsplash.com/640x480/?gray-womens-boots" }
+    ]
+  },
+  {
+    id: 18,
+    nome: "Chinelo de Plataforma",
+    categoria: "feminino",
+    preco: 119.9,
+    variacoes: [
+      { cor: "Preto", img: "https://source.unsplash.com/640x480/?black-platform-sandals" },
+      { cor: "Branco", img: "https://source.unsplash.com/640x480/?white-platform-sandals" },
+      { cor: "Bege", img: "https://source.unsplash.com/640x480/?beige-platform-sandals" }
+    ]
+  }
+];
 const produtoID = parseInt(localStorage.getItem("produtoID"));
 
 console.log("Produtos carregados:", produtos.length);
