@@ -16,7 +16,8 @@ jobs:
       - name: Prepare artifact
         run: |
           mkdir -p out
-          cp -r ./* out
+          # copy site files into 'out' but exclude the out dir itself and .git to avoid recursion
+          rsync -av --exclude='.git' --exclude='out' --exclude='.github' ./ out/
       - uses: actions/upload-pages-artifact@v1
         with:
           path: out
