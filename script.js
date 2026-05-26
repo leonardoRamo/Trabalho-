@@ -216,6 +216,11 @@ function parsePreco(valorTexto) {
   return Number(texto);
 }
 
+function isProdutoValido(produto) {
+  return produto && typeof produto.id === "number" && typeof produto.nome === "string" && typeof produto.categoria === "string" && typeof produto.preco === "number" &&
+    Array.isArray(produto.variacoes) && produto.variacoes.length > 0 && produto.variacoes.every(v => v && typeof v.cor === "string" && typeof v.img === "string" && v.img.trim());
+}
+
 function getProdutosStorage() {
   const local = localStorage.getItem(STORAGE_PRODUTOS);
   if (!local) {
@@ -224,7 +229,12 @@ function getProdutosStorage() {
   }
 
   try {
-    return JSON.parse(local);
+    const lista = JSON.parse(local);
+    if (!Array.isArray(lista) || lista.length === 0 || !lista.every(isProdutoValido)) {
+      localStorage.setItem(STORAGE_PRODUTOS, JSON.stringify(produtos));
+      return produtos.slice();
+    }
+    return lista;
   } catch (error) {
     console.warn("Erro ao ler produtos do localStorage:", error);
     localStorage.setItem(STORAGE_PRODUTOS, JSON.stringify(produtos));
@@ -263,7 +273,7 @@ function carregarProdutos(lista) {
     const coresHtml = p.variacoes.map((v, i) => ` <span class="swatch" data-prod="${p.id}" data-idx="${i}" title="${v.cor}" style="background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));"></span>`).join("");
     container.innerHTML += `
       <div class="produto" data-id="${p.id}">
-        <img src="${imagem}" alt="${p.nome}" id="img-prod-${p.id}">
+        <img src="${imagem}" alt="${p.nome}" id="img-prod-${p.id}" onerror="this.src='https://via.placeholder.com/640x480?text=Sem+imagem'">
         <div class="produto-body">
           <h3>${p.nome}</h3>
           <div class="swatches">${coresHtml}</div>
